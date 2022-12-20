@@ -36,29 +36,34 @@ public class FirstController {
     }
 
     @GetMapping("/calc")
-    public String calcPage(@RequestParam(value = "a", required = false) String a,
-                           @RequestParam(value = "b", required = false) String b,
+    public String calcPage(@RequestParam(value = "a", required = false) int a,
+                           @RequestParam(value = "b", required = false) int b,
                            @RequestParam(value = "action", required = false) String action,
                            Model model) {
-        int result;
+        double result;
         String answer = null;
 
-        if (action.equals("divison")) {
-            if (Integer.parseInt(b) == 0) {
+        if (action.equals("division")) {
+            System.out.println("This is division !");
+            if (b == 0) {
                 answer = "Division by zero"; //почему-то не работает при делении на ноль
                 System.out.println(answer);
             } else {
-                result = Integer.parseInt(a) / Integer.parseInt(b);
+                result = a / (double)b;
                 answer = String.valueOf(result);
             }
         } else {
             result = 0;
-            if (action.equals("addition"))
-                result = Integer.parseInt(a) + Integer.parseInt(b);
-            else if (action.equals("subtraction"))
-                result = Integer.parseInt(a) - Integer.parseInt(b);
+            if (action.equals("addition")) {
+                System.out.println("This is addition !");
+                result = a + b;
+            }
+            else if (action.equals("subtraction")) {
+                System.out.println("This is subtraction !");
+                result = a - b;
+            }
             else if (action.equals("multiplication"))
-                result = Integer.parseInt(a) * Integer.parseInt(b);
+                result = a * b;
             answer = String.valueOf(result);
         }
         model.addAttribute("answer", answer);
