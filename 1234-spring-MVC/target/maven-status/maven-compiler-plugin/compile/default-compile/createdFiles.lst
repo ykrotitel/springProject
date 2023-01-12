@@ -1,1 +1,4 @@
-ru/rasskazov/testSpring/HelloController.class
+ru/rasskazov/testSpring/controllers/SecondController.class
+ru/rasskazov/testSpring/controllers/FirstController.class
+ru/rasskazov/testSpring/config/SpringConfig.class
+ru/rasskazov/testSpring/config/MySpringDispatcherServletInitializer.class
