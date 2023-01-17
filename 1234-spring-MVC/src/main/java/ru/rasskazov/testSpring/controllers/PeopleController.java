@@ -3,10 +3,9 @@ package ru.rasskazov.testSpring.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.rasskazov.testSpring.dao.PersonDAO;
+import ru.rasskazov.testSpring.models.Person;
 
 @Controller
 @RequestMapping("/people")
@@ -31,5 +30,34 @@ public class PeopleController {
         // Получим одного челоека по его id через DAO
         model.addAttribute("person " + id, personDAO.show(id));
         return "/people/show";
+    }
+
+    @GetMapping("/new")
+    public String newPerson(@ModelAttribute("person") Person person) {
+        return ("/people/newPerson");
+    }
+
+//    @PostMapping("/newPerson")
+//    public String create(@RequestParam("name") String name,
+//                         @RequestParam("id") int id,
+//                         @RequestParam("email") String email,
+//                         Model model) {
+//
+//        Person person = new Person(id, name);
+//        person.setMail(email);
+//
+//        // добавляем человека в БД
+//
+//        model.addAttribute(person);
+//        return ("/people/newPerson");
+//    }
+
+    @PostMapping()
+    public String createWithAnnotation(@ModelAttribute("person") Person person) {
+
+        personDAO.save(person);
+        //добавляем человека в БД
+
+        return "redirect:/people/index";
     }
 }

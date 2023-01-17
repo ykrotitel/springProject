@@ -5,7 +5,6 @@ import ru.rasskazov.testSpring.dao.PersonDAO;
 
 public class Person {
 
-
     private int id;
     private String name;
 
@@ -13,6 +12,8 @@ public class Person {
         this.id = id;
         this.name = name;
     }
+
+    public Person() {}
 
     public int getId() {
         return id;
