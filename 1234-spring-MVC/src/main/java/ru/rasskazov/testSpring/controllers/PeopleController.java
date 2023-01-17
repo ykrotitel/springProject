@@ -17,7 +17,7 @@ public class PeopleController {
         this.personDAO = personDAO;
     }
 
-    @GetMapping("/index")
+    @GetMapping()
     public String index(Model model) {
         // Получим всех людей из DAO и передадим их всех для отображения на представлении View
         model.addAttribute("people", personDAO.index());
@@ -28,7 +28,7 @@ public class PeopleController {
     public String show(@PathVariable("id") int id,
                        Model model) {
         // Получим одного челоека по его id через DAO
-        model.addAttribute("person " + id, personDAO.show(id));
+        model.addAttribute("person" + id, personDAO.show(id));
         return "/people/show";
     }
 
@@ -59,5 +59,22 @@ public class PeopleController {
         //добавляем человека в БД
 
         return "redirect:/people/index";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editForm(@PathVariable("id") int id,
+                            Model model) {
+        model.addAttribute("person", personDAO.show(id));
+        return "/people/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("person") Person person,
+                         @PathVariable("id") int id) {
+
+        // добавляем человека в БД
+
+        personDAO.update(person, id);
+        return "redirect:people";
     }
 }
