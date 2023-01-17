@@ -25,10 +25,8 @@ public class PeopleController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id,
-                       Model model) {
-        // Получим одного челоека по его id через DAO
-        model.addAttribute("person" + id, personDAO.show(id));
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("person", personDAO.show(id));
         return "/people/show";
     }
 
@@ -58,7 +56,7 @@ public class PeopleController {
         personDAO.save(person);
         //добавляем человека в БД
 
-        return "redirect:/people/index";
+        return "redirect:/people";
     }
 
     @GetMapping("/{id}/edit")
@@ -75,6 +73,6 @@ public class PeopleController {
         // добавляем человека в БД
 
         personDAO.update(person, id);
-        return "redirect:people";
+        return "redirect:/people";
     }
 }
