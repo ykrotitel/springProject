@@ -63,6 +63,7 @@ public class PeopleController {
     public String editForm(@PathVariable("id") int id,
                             Model model) {
         model.addAttribute("person", personDAO.show(id));
+        System.out.println("This is editForm !");
         return "/people/edit";
     }
 
@@ -72,6 +73,7 @@ public class PeopleController {
 
         // добавляем человека в БД
 
+        System.out.println("This is update !");
         personDAO.update(person, id);
         return "redirect:/people";
     }
