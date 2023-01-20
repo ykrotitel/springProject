@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import ru.rasskazov.testSpring.dao.PersonDAO;
 import ru.rasskazov.testSpring.models.Person;
 
+
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
 
     private final PersonDAO personDAO;
+
     @Autowired
     public PeopleController(PersonDAO personDAO) {
         this.personDAO = personDAO;
@@ -77,4 +79,11 @@ public class PeopleController {
         personDAO.update(person, id);
         return "redirect:/people";
     }
+
+    @DeleteMapping("${id}")
+    public String delete(@PathVariable("id") int id) {
+        personDAO.delete(id);
+        return ("redirect:/people");
+    }
 }
+

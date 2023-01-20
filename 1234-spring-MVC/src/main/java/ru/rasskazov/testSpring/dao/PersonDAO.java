@@ -8,7 +8,6 @@ import java.util.List;
 
 @Component
 public class PersonDAO {
-
     private static int PEOPLE_COUNT;
     private List<Person> people;
 
@@ -21,9 +20,7 @@ public class PersonDAO {
         people.add(new Person(++PEOPLE_COUNT, "Mate"));
     }
 
-    public List<Person> index() {
-        return people;
-    }
+    public List<Person> index() { return people; }
 
     public Person show(int id) {
         return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
@@ -35,9 +32,13 @@ public class PersonDAO {
     }
 
     public void update(Person updatedPerson, int id) {
-
         Person newPerson = show(id);
+
         newPerson.setName(updatedPerson.getName());
+    }
+
+    public void delete(int id) {
+        people.removeIf(p -> p.getId() == id);
     }
 }
 
